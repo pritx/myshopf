@@ -6,20 +6,14 @@ import Axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 const Login = () => {
-  const [xurl, setXurl] = useState('http://192.168.43.34:8000/api/login/');
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
-  // Products
-  useEffect(() => {
-    Axios.get(xurl).then((response)=>{
-      console.log(response.data);	
-      return [];	
-    })
-}, [xurl]);	
 
-  const changeUsername = (event) => {
-    return Promise.all[setUsername(event.target.value),console.log(username)];
+  const changeUsername = async (event) => {
+    // setUsername(...username, event.target.value);
+    await Promise[setUsername(...username, event.target.value),console.log(username)]; 
+    console.log(username);
   }
   
 
@@ -91,6 +85,7 @@ const Login = () => {
                       onblur="this.placeholder = 'Password'"
                       type = "text"
                       onChange={(e)=>changePassword(e)}
+                      {...username}
                     />
                   </div>
                   <div className="col-md-12 form-group">

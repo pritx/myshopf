@@ -36,6 +36,30 @@
 
 .products-height {
   height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-cursor {
+  cursor: pointer;
+}
+
+.color-grey {
+  color: grey;
+}
+
+.logo-font {
+  font-size: 16px;
+  padding-left: 10px;
+  font-weight: bold;
+  color: #404040;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /* .some-bg {
   background-color: aqua;

@@ -5,42 +5,56 @@ import Footer from '../components/Footer'
 import BannerText from '../components/BannerText'
 import Axios from 'axios'
 import ProductCard from '../components/ProductCard'
+import DealOf from '../components/DealOf'
 
 const Category = () => {
     const [next, setNext] = useState("");
   const [prev, setPrev] = useState("");
   const [pagdata, setPagdata] = useState([]);
-  const [purl, setPurl] = useState([]);
-  const [xurl, setXurl] = useState("http://192.168.43.34:8000/api/products/");
+  const [purl, setPurl] = useState('');
+  // const [xurl, setXurl] = useState("http://192.168.43.34:8000/api/products/");
+  const [xurl, setXurl] = useState("https://iambook.herokuapp.com/api/products/");
   const [imgurl, setImgurl] = useState([]);
   const [caturl, setCaturl] = useState(
-    "http://192.168.43.34:8000/api/categories/"
+    // "http://192.168.43.34:8000/api/categories/"
+    "https://iambook.herokuapp.com/api/categories"
   );
   const [category, setCategory] = useState([]);
   const [catsurl, setCatsurl] = useState([]);
 
   // Products
+  
   useEffect(() => {
     Axios.get(xurl).then((response) => {
-      console.log(response.data.previous + "from category");
+      console.log("from category");
+      setNext(null);
+      setPrev(null);
+      setPagdata([]);
+      console.log(response.data.results);
       return [
         setPrev(response.data.previous),
         setNext(response.data.next),
         setPagdata(response.data.results),
-        setPurl(response.data.results.url),
+        // setPurl(response.data.results.url),
       ];
     });
+    
+    // // Sub Categories List
+    // Axios.get(caturl).then((response) => {
+    //   console.log(response.data.results);
+    //   return [setCategory(response.data.results), console.log(category)];
+    // });
+  }, [xurl, setPrev, setNext, setPagdata]);
+
+  useEffect(() => {
     // Browse Categories List
     Axios.get(caturl).then((response) => {
-      console.log(response.data.results.children);
-      return [setCategory(response.data.results), console.log(category)];
-    });
-    // Sub Categories List
-    Axios.get(caturl).then((response) => {
+      console.log('Browse List');
       console.log(response.data.results);
       return [setCategory(response.data.results), console.log(category)];
     });
-  }, [xurl]);
+  }, [caturl])
+  
     return (
         <div>
             <Header />
@@ -86,7 +100,7 @@ const Category = () => {
 						</select> */}
               </div>
               <div className="sorting mr-auto">
-                <div className="head has-text-white">Browse Categories</div>
+                <div className="head has-text-white">Latest Products Added</div>
                 {/* <select>
 							<option value="1">Show 12</option>
 							<option value="1">Show 12</option>
@@ -126,8 +140,9 @@ const Category = () => {
                   return (
                     <ProductCard
                       title={item.title}
-                      realurl={purl}
-                      imageurl={item.url}
+                      // realurl={purl}
+                      prourl={item.url}
+                      upc={item.upc}
                     />
                   );
                 })}
@@ -146,10 +161,10 @@ const Category = () => {
                 <a className="prev-arrow">
                   <i className="fa fa-long-arrow-left" aria-hidden="true"></i>
                 </a>
-                <a></a>
-                <a></a>
-                <a></a>
-                <a></a>
+                <a>1</a>
+                <a>2</a>
+                <a>3</a>
+                <a>...</a>
                 <a className="next-arrow">
                   <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
                 </a>
@@ -160,10 +175,8 @@ const Category = () => {
           </div>
         </div>
       </div>
-
-      {/* <DealOf /> */}
+      <DealOf />
       <Footer />
-
         </div>
     )
 }

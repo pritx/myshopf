@@ -29,7 +29,7 @@ const Header = () => {
             <div className="container">
               {/* Brand and toggle get grouped for better mobile display */}
               <a className="navbar-brand logo_h" href="index.html">
-                <img src={require("../static/img/logo.png")} alt="" />
+                <img className="logo-height" src={require("../static/img/fav.png")} alt="" /><span className="logo-font">MKS</span>
                 {/* <img src="img/logo.png" alt="" /> */}
               </a>
               <button
